@@ -23,17 +23,15 @@ namespace Mazes
 
         private static void EstablishSteps()
         {
-            if (_innerWidth <= _innerHeight)
+            if (_innerWidth < _innerHeight)
             {
-                _vertStep = (_innerHeight / _innerWidth);
-                if (_innerHeight - (_vertStep * _innerWidth) > (_vertStep)) _vertStep++;
+                _vertStep = ((_innerHeight - 1) / (_innerWidth - 1));
                 _horStep = 1;
                 _highMaze = true;
             }
             else
             {
-                _horStep = (_innerWidth / _innerHeight);
-                if (_innerWidth - (_horStep * _innerHeight) > (_horStep)) _horStep++;
+                _horStep = ((_innerWidth - 1) / (_innerHeight - 1));
                 _vertStep = 1;
             }
         }
@@ -52,7 +50,7 @@ namespace Mazes
 
         private static void MoveFirstRight(Robot robot)
         {
-            while (robot.X < _innerWidth)
+            while (robot.X < _innerWidth) 
             {
                 MoveRight(robot);
                 if (robot.Y < _innerHeight) MoveDown(robot);

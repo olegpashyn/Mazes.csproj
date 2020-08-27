@@ -35,8 +35,8 @@ namespace Mazes
             //yield return new MazeTestCase("pyramid3", PyramidMazeTask.MoveOut);
             //yield return new MazeTestCase("pyramid4", PyramidMazeTask.MoveOut);
             yield return new MazeTestCase("diagonal4", DiagonalMazeTask.MoveOut);
-            yield return new MazeTestCase("diagonal2", DiagonalMazeTask.MoveOut);
-            yield return new MazeTestCase("diagonal3", DiagonalMazeTask.MoveOut);
+            //yield return new MazeTestCase("diagonal2", DiagonalMazeTask.MoveOut);
+            //yield return new MazeTestCase("diagonal3", DiagonalMazeTask.MoveOut);
         }
     }
 
