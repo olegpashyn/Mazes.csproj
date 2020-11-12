@@ -4,18 +4,18 @@ namespace Mazes
 {
 	public static class DiagonalMazeTask
     {
-        private static int _innerWidth;
-        private static int _innerHeight;
-        private static int _vertStep;
-        private static int _horStep;
-        private static bool _highMaze;
+        private static int innerWidth;
+        private static int innerHeight;
+        private static int vertStep;
+        private static int horStep;
+        private static bool highMaze;
 
 		public static void MoveOut(Robot robot, int width, int height)
         {
-            _innerWidth = width - 2;
-            _innerHeight = height - 2;
+            innerWidth = width - 2;
+            innerHeight = height - 2;
             EstablishSteps();
-            if (_highMaze)
+            if (highMaze)
                 MoveFirstDown(robot);
             else
                 MoveFirstRight(robot);
@@ -23,48 +23,55 @@ namespace Mazes
 
         private static void EstablishSteps()
         {
-            if (_innerWidth <= _innerHeight)
-            {
-                _vertStep = (_innerHeight / _innerWidth);
-                if (_innerHeight - (_vertStep * _innerWidth) > (_vertStep)) _vertStep++;
-                _horStep = 1;
-                _highMaze = true;
-            }
+            if (innerWidth <= innerHeight)
+				HighMazeCase();
             else
-            {
-                _horStep = (_innerWidth / _innerHeight);
-                if (_innerWidth - (_horStep * _innerHeight) > (_horStep)) _horStep++;
-                _vertStep = 1;
-            }
+            	LongMazeCase();
+        }
+		
+		private static void HighMazeCase()
+		{
+             vertStep = (innerHeight / innerWidth);
+             if (innerHeight - (vertStep * innerWidth) > (vertStep)) vertStep++;
+             horStep = 1;
+             highMaze = true;
+        }
+		
+		private static void LongMazeCase()
+		{
+             horStep = (innerWidth / innerHeight);
+             if (innerWidth - (horStep * innerHeight) > (horStep)) horStep++;
+             vertStep = 1;
+			 highMaze = false;
         }
 
         private static void MoveRight(Robot robot)
         {
-            for (var i = 0; i < _horStep; i++)
+            for (var i = 0; i < horStep; i++)
                 robot.MoveTo(Direction.Right);
         }
 
         private static void MoveDown(Robot robot)
         {
-            for (var i = 0; i < _vertStep; i++)
+            for (var i = 0; i < vertStep; i++)
                 robot.MoveTo(Direction.Down);
         }
 
         private static void MoveFirstRight(Robot robot)
         {
-            while (robot.X < _innerWidth)
+            while (robot.X < innerWidth)
             {
                 MoveRight(robot);
-                if (robot.Y < _innerHeight) MoveDown(robot);
+                if (robot.Y < innerHeight) MoveDown(robot);
             }
         }
 
         private static void MoveFirstDown(Robot robot)
         {
-            while (robot.Y < _innerHeight)
+            while (robot.Y < innerHeight)
             {
                 MoveDown(robot);
-                if (robot.X < _innerWidth) MoveRight(robot);
+                if (robot.X < innerWidth) MoveRight(robot);
             }
         }
 	}
